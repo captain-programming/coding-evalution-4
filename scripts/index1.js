@@ -1,50 +1,26 @@
-// Ude Import export (MANDATORY)
-// Onclicking store the news in local storage with key "news" so that you can access that on news.html page
-
-
-import navbar from "../components/navbar.js";
-
-document.getElementById("navbar").innerHTML=navbar();
-
-
-let Searchdiv=document.getElementById("search_input");
-let SLocalData=JSON.parse(localStorage.getItem("search"));
-
-
-Searchdiv.addEventListener("keyup", (e) =>{
-    if(e.keyCode === 13){
-        let value=Searchdiv.value;
-        // console.log(value);
-        SearchData(value);
-    }
-});
-
-
-
-let SearchData= async (value) => {
-    let query=value
+async function cSearch(id){
+    
     try{
-        let res=await fetch(`https://masai-mock-api.herokuapp.com/news?q=${query}`);
+        let res=await fetch(`https://masai-mock-api.herokuapp.com/news/top-headlines?country=${id}`)
 
-        let data = await res.json();
-        data=data.articles;
-        append(data);
+        let data=await res.json()
         // console.log(data);
-
+        append(data)
     }catch(err){
         console.log(err);
     }
+
 }
 
-SearchData(SLocalData);
 
 let append = (data) =>{
 
     document.getElementById("results").innerHTML=null;
 
+    data=data.articles;
     data.forEach(ele => {
 
-        // console.log(ele.title);
+        console.log(ele.title);
     
         let div=document.createElement("div");
         let div1=document.createElement("div");
@@ -64,7 +40,8 @@ let append = (data) =>{
     
         document.getElementById("results").append(div)
     })
-};
+}
+
 
 function newsPage(data){
     // console.log(data)
@@ -72,3 +49,4 @@ function newsPage(data){
     window.location.href="/news.html";
 
 }
+

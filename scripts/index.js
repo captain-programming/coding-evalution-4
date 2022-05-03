@@ -10,52 +10,33 @@ import sidebar from "../components/sidebar.js";
 
 document.getElementById("sidebar").innerHTML=sidebar();
 
-let Search=document.getElementById("input");
 
+let Search=document.getElementById("search_input");
 
 Search.addEventListener("keyup", (e) =>{
     if(e.keyCode === 13){
         let value=Search.value;
-        // window.location.href="search.js"
-        SearchData(value);
-        localStorage.setItem("search",JSON.stringify(value));
+        // console.log(Search.value);
+        // SearchData(value);
+        localStorage.setItem("search",JSON.stringify(value));    
+
+        window.location.href="/search.html"
     }
 });
 
-let SearchData= async (value) => {
-    let query=value
-    try{
-        let res=await fetch(`https://masai-mock-api.herokuapp.com/news?q=${query}`);
 
-        let data = await res.json();
-        append(data);
-        console.log(data);
 
-    }catch(err){
-        console.log(err);
-    }
-}
+// let SearchData= async (value) => {
+//     let query=value
+//     try{
+//         let res=await fetch(`https://masai-mock-api.herokuapp.com/news?q=${query}`);
 
-let append = (data) =>{
+//         let data = await res.json();
+//         data=data.articles;
+//         console.log(data);
+//         localStorage.setItem("search",JSON.stringify(data));    
 
-    data=data.articles;
-    data.forEach(ele => {
-
-        console.log(ele.title);
-    
-        let div=document.createElement("div");
-        let div1=document.createElement("div");
-    
-        let img=document.createElement("img");
-        img.src=ele.urlToImage;
-        let title=document.createElement("h3");
-        title.innerText=ele.title;
-        let des=document.createElement("p");
-        des.innerText=ele.description;
-    
-        div1.append(title, des);
-        div.append(img, div1);
-    
-        document.getElementById("results").append(div)
-    })
-}
+//     }catch(err){
+//         console.log(err);
+//     }
+// }

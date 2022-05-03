@@ -69,6 +69,6 @@ let append = (data) =>{
 function newsPage(data){
     // console.log(data)
     localStorage.setItem("news", JSON.stringify(data));
-    window.location.href="/news.html";
+    window.location.href="./news.html";
 
 }

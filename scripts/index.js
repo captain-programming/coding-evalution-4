@@ -20,7 +20,7 @@ Search.addEventListener("keyup", (e) =>{
         // SearchData(value);
         localStorage.setItem("search",JSON.stringify(value));    
 
-        window.location.href="/search.html"
+        window.location.href="search.html"
     }
 });
 
